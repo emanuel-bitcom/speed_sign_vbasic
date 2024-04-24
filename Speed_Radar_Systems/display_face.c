@@ -3,12 +3,12 @@
 
 /*Public functions definitions*/
 void display_face_smile(){
-	face_smile_on();
+	face_sad_on();
 }
 
 
 void display_face_sad(){
-	face_sad_on();
+	face_smile_on();
 }
 
 void display_face_clear(){

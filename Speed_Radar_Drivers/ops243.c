@@ -9,13 +9,15 @@
 #include "main.h"
 #include "string.h"
 #include "stdlib.h"
+#include "gpio.h"
 
 char OPS_RX_char='\0';
 char OPS_RX_buffer[10]={0};
-char Rx_index = 0;
-char Rx_READY_FL = 0;
+volatile char Rx_index = 0;
+volatile char Rx_READY_FL = 0;
 
 void ops_start_measurements(){
+	HAL_GPIO_WritePin(RADAR_NRST_GPIO_Port, RADAR_NRST_Pin, GPIO_PIN_SET);
 	memset(OPS_RX_buffer,0,10);
 	Rx_index = 0;
 	HAL_UART_Receive_IT(&huart2, &OPS_RX_buffer[Rx_index], 1);
@@ -43,16 +45,18 @@ float ops_get_measured_speed(){
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   /* Prevent unused argument(s) compilation warning */
-  UNUSED(huart);
+//  UNUSED(huart);
+	printf("%c",OPS_RX_buffer[Rx_index]);
+	printf("\r\n");
 
-  /* see if '\n' was received */
-  if(OPS_RX_buffer[Rx_index]=='\n'){
-	  OPS_RX_buffer[Rx_index]='\0';
-	  Rx_index = -1;
-	  Rx_READY_FL = 1;
-  }else{
-	  Rx_READY_FL = 0;
-  }
+//  /* see if '\n' was received */
+//  if(OPS_RX_buffer[Rx_index]=='.'){
+//	  OPS_RX_buffer[Rx_index]='\0';
+//	  Rx_index = -1;
+//	  Rx_READY_FL = 1;
+//  }else{
+//	  Rx_READY_FL = 0;
+//  }
 
   if(++Rx_index>10){
 	  Rx_index = 0;

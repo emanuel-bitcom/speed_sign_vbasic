@@ -54,6 +54,8 @@
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -97,7 +99,6 @@ int main(void)
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
   speed_sign_init();
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -163,6 +164,15 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void delay(unsigned int interval_ms){
 	HAL_Delay(interval_ms);
+}
+
+PUTCHAR_PROTOTYPE {
+	/* Place your implementation of fputc here */
+	/* e.g. write a character to the USART6 and Loop until the end of transmission */
+#ifdef DEBUG
+	HAL_UART_Transmit(&huart3, (uint8_t*) &ch, 1, 30);
+#endif
+	return ch;
 }
 
 /* USER CODE END 4 */

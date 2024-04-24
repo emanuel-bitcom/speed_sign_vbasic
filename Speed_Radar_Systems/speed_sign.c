@@ -9,11 +9,17 @@ void speed_sign_init(){
 	radar_init();
 }
 
-
+int speeds[]={20, 30, 50, 70, 100, 120};
+int speed_index=0;
 void speed_sign_loop(){
     int current_speed_kmh = 0;
     /*Read Speed from radar*/
-    radar_rsp_e radar_resp = radar_get_speed_kmh(&current_speed_kmh);
+//    radar_rsp_e radar_resp = radar_get_speed_kmh(&current_speed_kmh);
+    radar_rsp_e radar_resp=RADAR_SPEED_OK;
+    current_speed_kmh=speeds[speed_index++];
+    if(speed_index>5)
+    	speed_index=0;
+
     if(radar_resp==RADAR_SPEED_VOID){
         /*on void speed just continue reading*/
         return;

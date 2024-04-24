@@ -3,6 +3,9 @@
 
 /*Public functions definitions*/
 void radar_init(){
+#ifdef DEBUG
+	printf("Radar initializing...\r\n");
+#endif
 	ops_start_measurements();
 
 }
