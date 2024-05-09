@@ -31,6 +31,11 @@ void speed_sign_loop(){
         if(current_speed_kmh_u >= LIMIT_SPEED_KMH)
             speed_type_bad_good = SPEED_BAD;
 
+        //test for minimum speed detected
+        if(current_speed_kmh_u<MINIMUM_SPEED_DETECTED){
+        	return;
+        }
+
         display_speed(current_speed_kmh_u, speed_type_bad_good);
         /*Blocking call*/
         display_wait_timeout(SPEED_ON_TIMEOUT_MS);

@@ -44,18 +44,11 @@ float ops_get_measured_speed(){
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-  /* Prevent unused argument(s) compilation warning */
-//  UNUSED(huart);
-//	printf("%c",OPS_RX_buffer[Rx_index]);
-//	printf("\r\n");
-
   /* see if '\n' was received */
   if(OPS_RX_buffer[Rx_index]=='\n'){
 	  OPS_RX_buffer[Rx_index]='\0';
 	  Rx_index = -1;
 	  Rx_READY_FL = 1;
-	  	printf("%s",OPS_RX_buffer);
-	  	printf("\r\n");
   }else{
 	  Rx_READY_FL = 0;
   }
