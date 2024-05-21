@@ -12,13 +12,13 @@
 #define LEVEL_LOW 0
 
 void display_seg_red_on(){
-	HAL_GPIO_WritePin(SEG_RED_GPIO_Port, SEG_RED_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(SEG_GREEN_GPIO_Port, SEG_GREEN_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(SEG_RED_GPIO_Port, SEG_RED_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(SEG_GREEN_GPIO_Port, SEG_GREEN_Pin, GPIO_PIN_RESET);
 }
 
 void display_seg_green_on(){
-	HAL_GPIO_WritePin(SEG_RED_GPIO_Port, SEG_RED_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(SEG_GREEN_GPIO_Port, SEG_GREEN_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(SEG_RED_GPIO_Port, SEG_RED_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(SEG_GREEN_GPIO_Port, SEG_GREEN_Pin, GPIO_PIN_SET);
 }
 
 void display_seg_power_off(){
